@@ -1,6 +1,6 @@
 /* Gradient Background */
 body {
-    background: linear-gradient(to bottom, #3498db, #2ecc71); /* Gradient from light blue to green */
+    background: linear-gradient(to bottom, #3498db, #3498db); /* Gradient from blue to blue (single color) */
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
