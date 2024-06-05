@@ -1,54 +1,59 @@
-const questions = [
-    { question: "Simplify: 3x + 5x", answer: "8x" },
-    { question: "Simplify: 4y - 2y", answer: "2y" },
-    { question: "Simplify: 2a + 3b - a + b", answer: "a + 4b" },
-    { question: "Simplify: 6m - 4 + 2m + 8", answer: "8m + 4" },
-    { question: "Simplify: 5x - 2x + 3y - y", answer: "3x + 2y" },
-    { question: "Simplify: 7p - 3p + 2q - q", answer: "4p + q" },
-    { question: "Simplify: 2x + 4y - x - 2y", answer: "x + 2y" },
-    { question: "Simplify: 5a + 3b - 2a - b", answer: "3a + 2b" },
-    { question: "Simplify: 3m - 2m + 4n - n", answer: "m + 3n" },
-    { question: "Simplify: 10x - 5x + 2y - y", answer: "5x + y" }
+// List of expressions for the game
+var expressions = [
+    { expression: '6m - 4 + 2m + 8', answer: '8m + 4' },
+    { expression: '5x - 2x + 3y - y', answer: '3x + 2y' },
+    { expression: '7p - 3p + 2q - q', answer: '4p + q' },
+    { expression: '2x + 4y - x - 2y', answer: 'x + 2y' },
+    { expression: '5a + 3b - 2a - b', answer: '3a + 2b' },
+    { expression: '3m - 2m + 4n - n', answer: 'm + 3n' },
+    { expression: '10x - 5x + 2y - y', answer: '5x + y' },
 ];
 
-let currentQuestionIndex = 0;
-let score = 0;
+// Variables to track game progress
+var currentQuestion = 0;
+var score = 0;
 
-function showQuestion() {
-    const questionElement = document.getElementById('question');
-    questionElement.textContent = questions[currentQuestionIndex].question;
-    updateProgress();
+// Function to initialize the game
+function initGame() {
+    currentQuestion = 0;
+    score = 0;
+    showQuestion();
 }
 
+// Function to display current question
+function showQuestion() {
+    var question = expressions[currentQuestion].expression;
+    document.getElementById('question').textContent = question;
+    document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
+}
+
+// Function to check answer
 function checkAnswer() {
-    const answerElement = document.getElementById('answer');
-    const resultElement = document.getElementById('result');
-    const userAnswer = answerElement.value.trim();
-    const correctAnswer = questions[currentQuestionIndex].answer;
+    var userAnswer = document.getElementById('answer').value.trim();
+    var correctAnswer = expressions[currentQuestion].answer;
 
     if (userAnswer === correctAnswer) {
-        resultElement.textContent = "Correct!";
-        resultElement.style.color = "green";
+        document.getElementById('result').textContent = 'Correct!';
         score++;
     } else {
-        resultElement.textContent = `Incorrect, the correct answer is ${correctAnswer}.`;
-        resultElement.style.color = "red";
+        document.getElementById('result').textContent = 'Incorrect. The correct answer is ' + correctAnswer;
     }
 
-    answerElement.value = '';
-    currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-    showQuestion();
-    updateScore();
+    document.getElementById('score').textContent = 'Score: ' + score;
+    document.getElementById('answer').value = '';
+
+    // Move to the next question or end the game
+    currentQuestion++;
+    if (currentQuestion < expressions.length) {
+        showQuestion();
+    } else {
+        endGame();
+    }
 }
 
-function updateScore() {
-    const scoreElement = document.getElementById('score');
-    scoreElement.textContent = `Score: ${score}`;
+// Function to end the game
+function endGame() {
+    var percentage = (score / expressions.length) * 100;
+    var message = 'Game Over! You scored ' + score + ' out of ' + expressions.length + ' (' + percentage + '%).';
+    alert(message);
 }
-
-function updateProgress() {
-    const progressElement = document.getElementById('progress');
-    progressElement.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-}
-
-document.addEventListener('DOMContentLoaded', showQuestion);
