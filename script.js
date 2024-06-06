@@ -37,6 +37,8 @@ function showQuestion() {
     var question = expressions[currentQuestion].expression;
     document.getElementById('question').textContent = question;
     document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
+    document.getElementById('miniGameButton').style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'none';
 }
 
 // Function to normalize answers by removing spaces
@@ -52,6 +54,7 @@ function checkAnswer() {
     if (normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer)) {
         document.getElementById('result').textContent = 'Correct!';
         score++;
+        document.getElementById('miniGameButton').style.display = 'block'; // Show mini-game button
     } else {
         document.getElementById('result').textContent = 'Incorrect. The correct answer is ' + correctAnswer;
     }
@@ -66,6 +69,13 @@ function checkAnswer() {
     } else {
         endGame();
     }
+}
+
+// Function to start the mini-game
+function startMiniGame() {
+    document.getElementById('miniGameButton').style.display = 'none';
+    document.getElementById('gameCanvas').style.display = 'block';
+    document.getElementById('result').textContent = 'Enjoy the mini-game!';
 }
 
 // Function to end the game
