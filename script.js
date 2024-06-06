@@ -9,6 +9,15 @@ var expressions = [
     { expression: '10x - 5x + 2y - y', answer: '5x+y' },
 ];
 
+// Function to shuffle an array
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 // Variables to track game progress
 var currentQuestion = 0;
 var score = 0;
@@ -17,6 +26,7 @@ var score = 0;
 function initGame() {
     currentQuestion = 0;
     score = 0;
+    expressions = shuffle(expressions); // Shuffle questions
     console.log("Game initialized"); // Debug statement
     showQuestion();
 }
