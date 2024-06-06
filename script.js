@@ -56,4 +56,8 @@ function endGame() {
     var percentage = (score / expressions.length) * 100;
     var message = 'Game Over! You scored ' + score + ' out of ' + expressions.length + ' (' + percentage + '%).';
     alert(message);
+    initGame(); // Reset the game
 }
+
+// Initialize the game on page load
+window.onload = initGame;
