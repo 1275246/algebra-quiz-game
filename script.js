@@ -17,11 +17,13 @@ var score = 0;
 function initGame() {
     currentQuestion = 0;
     score = 0;
+    console.log("Game initialized"); // Debug statement
     showQuestion();
 }
 
 // Function to display current question
 function showQuestion() {
+    console.log("Showing question", currentQuestion); // Debug statement
     var question = expressions[currentQuestion].expression;
     document.getElementById('question').textContent = question;
     document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
