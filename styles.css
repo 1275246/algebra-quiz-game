@@ -1,16 +1,28 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Rubik+Moonrocks&display=swap');
+
 /* Gradient Background */
 body {
-    background: linear-gradient(to bottom, #3498db, #3498db); /* Gradient from blue to blue (single color) */
-    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #74ebd5, #ACB6E5); /* Gradient from teal to light blue */
+    font-family: 'Comic Neue', cursive;
     text-align: center;
     margin: 0;
     padding: 0;
     overflow: hidden; /* Prevent horizontal scrollbar */
 }
 
+/* Title Styles */
+h1 {
+    font-family: 'Rubik Moonrocks', cursive;
+    font-size: 3em;
+    color: #ffffff;
+    margin-top: 50px;
+    animation: fadeIn 1s ease; /* Fade-in animation */
+}
+
 /* Button Styles */
 button {
-    background-color: #2ecc71; /* Example vibrant color */
+    background-color: #ff7f50; /* Coral color */
     color: #fff;
     padding: 10px 20px;
     cursor: pointer;
@@ -20,27 +32,19 @@ button {
 }
 
 button:hover {
-    background-color: #27ae60; /* Darker shade for hover effect */
+    background-color: #ff6347; /* Darker coral for hover effect */
 }
 
-/* Title Animation */
-h1 {
-    font-size: 3em;
-    color: #fff;
-    margin-top: 100px;
-    animation: fadeIn 1s ease; /* Fade-in animation */
+/* Input Styles */
+input[type="text"] {
+    padding: 10px;
+    border: 2px solid #ff7f50;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 1em;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Game Container Animation */
+/* Game Container Styles */
 #game-container {
     background-color: rgba(255, 255, 255, 0.9); /* Add transparency to the background color */
     border: 1px solid #ddd;
@@ -50,6 +54,23 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     animation: slideIn 1s ease; /* Slide-in animation */
+}
+
+/* Result and Score Styles */
+#result, #score, #progress {
+    font-family: 'Comic Neue', cursive;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes slideIn {
