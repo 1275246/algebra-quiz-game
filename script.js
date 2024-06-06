@@ -1,12 +1,12 @@
 // List of expressions for the game
 var expressions = [
-    { expression: '6m - 4 + 2m + 8', answer: '8m + 4' },
-    { expression: '5x - 2x + 3y - y', answer: '3x + 2y' },
-    { expression: '7p - 3p + 2q - q', answer: '4p + q' },
-    { expression: '2x + 4y - x - 2y', answer: 'x + 2y' },
-    { expression: '5a + 3b - 2a - b', answer: '3a + 2b' },
-    { expression: '3m - 2m + 4n - n', answer: 'm + 3n' },
-    { expression: '10x - 5x + 2y - y', answer: '5x + y' },
+    { expression: '6m - 4 + 2m + 8', answer: '8m+4' },
+    { expression: '5x - 2x + 3y - y', answer: '3x+2y' },
+    { expression: '7p - 3p + 2q - q', answer: '4p+q' },
+    { expression: '2x + 4y - x - 2y', answer: 'x+2y' },
+    { expression: '5a + 3b - 2a - b', answer: '3a+2b' },
+    { expression: '3m - 2m + 4n - n', answer: 'm+3n' },
+    { expression: '10x - 5x + 2y - y', answer: '5x+y' },
 ];
 
 // Variables to track game progress
@@ -29,12 +29,17 @@ function showQuestion() {
     document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
 }
 
+// Function to normalize answers by removing spaces
+function normalizeAnswer(answer) {
+    return answer.replace(/\s+/g, '');
+}
+
 // Function to check answer
 function checkAnswer() {
     var userAnswer = document.getElementById('answer').value.trim();
     var correctAnswer = expressions[currentQuestion].answer;
 
-    if (userAnswer === correctAnswer) {
+    if (normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer)) {
         document.getElementById('result').textContent = 'Correct!';
         score++;
     } else {
