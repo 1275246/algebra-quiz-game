@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
 
 /* Gradient Background */
 body {
@@ -13,7 +13,7 @@ body {
 
 /* Title Styles */
 h1 {
-    font-family: 'Permanent Marker', cursive;
+    font-family: Arial, sans-serif; /* Change to Arial */
     font-size: 3em;
     color: #ffffff;
     margin-top: 50px;
