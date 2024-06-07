@@ -56,17 +56,20 @@ function checkAnswer() {
         document.getElementById('miniGameButton').style.display = 'block'; // Show mini-game button
     } else {
         document.getElementById('result').textContent = 'Incorrect. The correct answer is ' + correctAnswer;
+        setTimeout(nextQuestion, 1000);
     }
 
     document.getElementById('score').textContent = 'Score: ' + score;
     document.getElementById('answer').value = '';
+}
 
-    // Move to the next question or end the game
+// Function to move to the next question
+function nextQuestion() {
     currentQuestion++;
     if (currentQuestion < expressions.length) {
-        setTimeout(showQuestion, 1000); // Delay to show next question
+        showQuestion();
     } else {
-        setTimeout(endGame, 1000); // Delay to show end game message
+        endGame();
     }
 }
 
