@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var paddleX = (canvas.width - paddleWidth) / 2;
     var rightPressed = false;
     var leftPressed = false;
+    var answered = false; // Variable to track if a question has been answered
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
@@ -62,8 +63,11 @@ document.addEventListener("DOMContentLoaded", function() {
             if (x > paddleX && x < paddleX + paddleWidth) {
                 dy = -dy;
             } else {
-                // Instead of alerting "GAME OVER", simply reload the page
-                document.location.reload();
+                if (!answered) {
+                    // If the player hasn't answered a question yet, trigger "GAME OVER"
+                    alert("GAME OVER");
+                    document.location.reload();
+                }
             }
         }
 
@@ -75,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
         x += dx;
         y += dy;
+
+        requestAnimationFrame(draw);
     }
 
     var interval = setInterval(draw, 10);
@@ -88,11 +94,13 @@ document.addEventListener("DOMContentLoaded", function() {
             result.innerHTML = "Correct! You get to play the mini-game!";
             score.innerHTML = parseInt(score.innerHTML) + 1;
             generate();
+            answered = true; // Set answered to true after a correct answer
             // You can call a function to start the mini-game here
             // For example, startMiniGame();
         } else {
             result.innerHTML = "Incorrect! The correct answer is: " + eval(question);
             generate(); // Generate the next question regardless of the answer
+            answered = false; // Reset answered to false after an incorrect answer
         }
     }
 });
