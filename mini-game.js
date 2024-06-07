@@ -130,4 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
         outOfBoundsMessageShown = false; // Reset message shown flag
         snake = [{ x: 10, y: 10 }]; // Reset snake position
         dx = 1;
-       
+        dy = 0;
+        food = { x: Math.floor(Math.random() * (canvasWidth / cellSize)), y: Math.floor(Math.random() * (canvasHeight / cellSize)) }; // Generate new food position
+    }
+});
