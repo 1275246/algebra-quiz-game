@@ -106,7 +106,8 @@ function startMiniGame() {
     timeoutId = setTimeout(() => {
         document.getElementById('gameCanvas').style.display = 'none';
         alert('Time\'s up! Returning to the quiz.');
-        nextQuestion();
+        document.getElementById('answer').focus(); // Focus on the answer input field
+        checkAnswer(); // Automatically submit the answer
     }, 30000);
 }
 
