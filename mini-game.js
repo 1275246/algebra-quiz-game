@@ -37,49 +37,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to draw the food
     function drawFood() {
-        drawCell(food.x, food.y);
+        ctx.fillStyle = "red";
+        ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize, cellSize);
     }
 
     // Function to move the snake
     function moveSnake() {
         var head = { x: snake[0].x + dx, y: snake[0].y + dy };
-        snake.unshift(head);
+        
+        // Check if the snake has eaten the food
         if (head.x === food.x && head.y === food.y) {
-            // Snake ate the food
+            // Generate new food position
             food = { x: Math.floor(Math.random() * (canvasWidth / cellSize)), y: Math.floor(Math.random() * (canvasHeight / cellSize)) };
         } else {
-            // Remove tail segment
+            // Remove the tail segment
             snake.pop();
         }
-    }
-
-    // Function to handle user input
-    function handleInput(event) {
-        var key = event.keyCode;
-        // Prevent default behavior for arrow keys
-        if ([37, 38, 39, 40].includes(key)) {
-            event.preventDefault();
-        }
-        // Handle snake movement
-        if (key === 37 && dx === 0) { // Left arrow
-            dx = -1;
-            dy = 0;
-        } else if (key === 39 && dx === 0) { // Right arrow
-            dx = 1;
-            dy = 0;
-        } else if (key === 38 && dy === 0) { // Up arrow
-            dx = 0;
-            dy = -1;
-        } else if (key === 40 && dy === 0) { // Down arrow
-            dx = 0;
-            dy = 1;
-        }
-    }
-
-    // Function to start the mini-game
-    function startMiniGame() {
-        isMiniGameActive = true;
-        miniGameStartTime = Date.now();
+        
+        // Add new head segment
+        snake.unshift(head);
     }
 
     // Main game loop
@@ -128,6 +104,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Add event listener for keyboard input
     document.addEventListener("keydown", handleInput);
+
+    // Function to handle user input
+    function handleInput(event) {
+        var key = event.keyCode;
+        // Prevent default behavior for arrow keys
+        if ([37, 38, 39, 40].includes(key)) {
+            event.preventDefault();
+        }
+        // Handle snake movement
+        if (key === 37 && dx === 0) { // Left arrow
+            dx = -1;
+            dy = 0;
+        } else if (key === 39 && dx === 0) { // Right arrow
+            dx = 1;
+            dy = 0;
+        } else if (key === 38 && dy === 0) { // Up arrow
+            dx = 0;
+            dy = -1;
+        } else if (key === 40 && dy === 0) { // Down arrow
+            dx = 0;
+            dy = 1;
+        }
+    }
+
+    // Function to start the mini-game
+    function startMiniGame() {
+        isMiniGameActive = true;
+        miniGameStartTime = Date.now();
+    }
 
     // Function to reset the mini-game
     function resetMiniGame() {
