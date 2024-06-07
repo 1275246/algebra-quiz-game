@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Style the container to center the game */
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #snake-game {
+            display: none; /* Hide the Snake game initially */
+        }
+    </style>
 </head>
 <body>
     <h1>Kevin's Simplifying Expressions Game</h1>
@@ -20,9 +33,11 @@
         <p id="score">Score: 0</p>
         <p id="progress">Question 1 of 7</p>
         <button id="miniGameButton" style="display: none;" onclick="startMiniGame()">Play Mini-Game!</button>
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <!-- Embed the Snake game here -->
+        <iframe id="snake-game" src="https://www.google.com/search?q=snake+game" width="600" height="400" frameborder="0"></iframe>
     </div>
+
     <script src="script.js"></script>
-    <script src="mini-game.js"></script>
+    <!-- No need for mini-game.js -->
 </body>
 </html>
