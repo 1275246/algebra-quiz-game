@@ -21,7 +21,6 @@ function shuffle(array) {
 // Variables to track game progress
 var currentQuestion = 0;
 var score = 0;
-var timeoutId; // Variable to store timeout ID
 
 // Function to initialize the game
 function initGame() {
@@ -102,17 +101,29 @@ function startMiniGame() {
     document.getElementById('gameCanvas').style.display = 'block';
     initSnakeGame();
 
-    // Set the timeout for 30 seconds
-    timeoutId = setTimeout(() => {
+    // Store the timeout ID in a variable
+    var timeoutId = setTimeout(() => {
         document.getElementById('gameCanvas').style.display = 'none';
         alert('Time\'s up! Returning to the quiz.');
         nextQuestion();
-    }, 30000);
+    }, 30000); // 30 seconds timer
+
+    // Clear the timeout when the game ends (next question is clicked)
+    function clearTimer() {
+        clearTimeout(timeoutId);
+    }
+
+    // Call clearTimer function when the game ends
+    function endGame() {
+        clearTimer();
+    }
+
+    // Call clearTimer function when the window is unloaded
+    window.addEventListener('unload', clearTimer);
 }
 
 // Function to end the game
 function endGame() {
-    clearTimeout(timeoutId); // Clear the timeout when the game ends
     var percentage = (score / expressions.length) * 100;
     var message = 'Game Over! You scored ' + score + ' out of ' + expressions.length + ' (' + percentage + '%).';
     alert(message);
@@ -122,7 +133,6 @@ function endGame() {
 // Initialize the game on page load
 window.onload = initGame;
 
-// Rest of the code for the snake game remains unchanged
 // Snake game code
 var canvas = document.getElementById('gameCanvas');
 var context = canvas.getContext('2d');
