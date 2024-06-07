@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Setup canvas
     var canvas = document.getElementById("gameCanvas");
     var ctx = canvas.getContext("2d");
 
@@ -40,66 +39,4 @@ document.addEventListener("DOMContentLoaded", function() {
         snake.unshift(head);
         if (head.x === food.x && head.y === food.y) {
             // Snake ate the food
-            food = { x: Math.floor(Math.random() * (canvasWidth / cellSize)), y: Math.floor(Math.random() * (canvasHeight / cellSize)) };
-        } else {
-            // Remove tail segment
-            snake.pop();
-        }
-    }
-
-    // Function to handle user input
-    function handleInput(event) {
-        var key = event.keyCode;
-        if (key === 37 && dx === 0) { // Left arrow
-            dx = -1;
-            dy = 0;
-        } else if (key === 39 && dx === 0) { // Right arrow
-            dx = 1;
-            dy = 0;
-        } else if (key === 38 && dy === 0) { // Up arrow
-            dx = 0;
-            dy = -1;
-        } else if (key === 40 && dy === 0) { // Down arrow
-            dx = 0;
-            dy = 1;
-        }
-    }
-
-    // Main game loop
-    function gameLoop() {
-        // Clear canvas
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-        // Move and draw snake
-        moveSnake();
-        drawSnake();
-
-        // Draw food
-        drawFood();
-
-        // Check for game over conditions
-        var head = snake[0];
-        if (head.x < 0 || head.x >= canvasWidth / cellSize || head.y < 0 || head.y >= canvasHeight / cellSize) {
-            // Out of bounds
-            alert("Game over! You went out of bounds.");
-            document.location.reload();
-        } else {
-            for (var i = 1; i < snake.length; i++) {
-                if (head.x === snake[i].x && head.y === snake[i].y) {
-                    // Collided with itself
-                    alert("Game over! You collided with yourself.");
-                    document.location.reload();
-                }
-            }
-        }
-
-        // Call game loop again
-        requestAnimationFrame(gameLoop);
-    }
-
-    // Start the game loop
-    gameLoop();
-
-    // Add event listener for keyboard input
-    document.addEventListener("keydown", handleInput);
-});
+            food = { x: Math.floor(Math.random() * (canvasWidth / cellSize)), y: Math.floor(Math.random() * (canvasHeight / c
