@@ -56,6 +56,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to handle user input
     function handleInput(event) {
         var key = event.keyCode;
+        // Prevent default behavior for arrow keys
+        if ([37, 38, 39, 40].includes(key)) {
+            event.preventDefault();
+        }
+        // Handle snake movement
         if (key === 37 && dx === 0) { // Left arrow
             dx = -1;
             dy = 0;
