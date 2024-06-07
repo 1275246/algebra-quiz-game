@@ -27,16 +27,15 @@ function initGame() {
     currentQuestion = 0;
     score = 0;
     expressions = shuffle(expressions); // Shuffle questions
-    console.log("Game initialized"); // Debug statement
     showQuestion();
 }
 
 // Function to display current question
 function showQuestion() {
-    console.log("Showing question", currentQuestion); // Debug statement
     var question = expressions[currentQuestion].expression;
     document.getElementById('question').textContent = question;
     document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
+    document.getElementById('result').textContent = '';
     document.getElementById('miniGameButton').style.display = 'none';
     document.getElementById('gameCanvas').style.display = 'none';
 }
@@ -65,9 +64,9 @@ function checkAnswer() {
     // Move to the next question or end the game
     currentQuestion++;
     if (currentQuestion < expressions.length) {
-        showQuestion();
+        setTimeout(showQuestion, 1000); // Delay to show next question
     } else {
-        endGame();
+        setTimeout(endGame, 1000); // Delay to show end game message
     }
 }
 
