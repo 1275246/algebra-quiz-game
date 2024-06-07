@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #3498db, #3498db); /* Single gradient background */
+    background: linear-gradient(to right, #3498db, #5effcb); /* Updated gradient background */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -15,9 +15,9 @@ h1 {
 
 #game-container {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto; /* Increased margin for better spacing */
     padding: 20px;
-    background: linear-gradient(to right, #3498db, #3498db); /* Single gradient background */
+    background-color: #fff; /* White background for game container */
     border: 1px solid #ddd;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 8px;
@@ -37,31 +37,4 @@ h1 {
 button {
     padding: 10px 20px;
     font-size: 1em;
-    margin: 10px 0;
-    cursor: pointer;
-}
-
-#miniGameButton {
-    background-color: #0095DD;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-#gameCanvas {
-    margin-top: 20px;
-}
-
-.box {
-    width: 100px;
-    height: 100px;
-    transition: background-color 0.3s ease; /* Smooth color transition */
-}
-
-/* Media query for smaller screens */
-@media screen and (max-width: 600px) {
-    .box {
-        width: 50px;
-        height: 50px;
-    }
-}
+    margin: 1
