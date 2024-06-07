@@ -100,11 +100,26 @@ function startMiniGame() {
     document.getElementById('miniGameButton').style.display = 'none';
     document.getElementById('gameCanvas').style.display = 'block';
     initSnakeGame();
-    setTimeout(() => {
+
+    // Store the timeout ID in a variable
+    var timeoutId = setTimeout(() => {
         document.getElementById('gameCanvas').style.display = 'none';
         alert('Time\'s up! Returning to the quiz.');
         nextQuestion();
     }, 30000); // 30 seconds timer
+
+    // Clear the timeout when the game ends (next question is clicked)
+    function clearTimer() {
+        clearTimeout(timeoutId);
+    }
+
+    // Call clearTimer function when the game ends
+    function endGame() {
+        clearTimer();
+    }
+
+    // Call clearTimer function when the window is unloaded
+    window.addEventListener('unload', clearTimer);
 }
 
 // Function to end the game
