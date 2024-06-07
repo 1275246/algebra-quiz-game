@@ -24,20 +24,28 @@ var score = 0;
 
 // Function to initialize the game
 function initGame() {
-    currentQuestion = 0;
-    score = 0;
-    expressions = shuffle(expressions); // Shuffle questions
-    showQuestion();
+    try {
+        currentQuestion = 0;
+        score = 0;
+        expressions = shuffle(expressions); // Shuffle questions
+        showQuestion();
+    } catch (error) {
+        console.error("Error initializing the game:", error);
+    }
 }
 
 // Function to display current question
 function showQuestion() {
-    var question = expressions[currentQuestion].expression;
-    document.getElementById('question').textContent = question;
-    document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
-    document.getElementById('result').textContent = '';
-    document.getElementById('miniGameButton').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'none';
+    try {
+        var question = expressions[currentQuestion].expression;
+        document.getElementById('question').textContent = question;
+        document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
+        document.getElementById('result').textContent = '';
+        document.getElementById('miniGameButton').style.display = 'none';
+        document.getElementById('gameCanvas').style.display = 'none';
+    } catch (error) {
+        console.error("Error showing the question:", error);
+    }
 }
 
 // Function to normalize answers by removing spaces
@@ -47,45 +55,61 @@ function normalizeAnswer(answer) {
 
 // Function to check answer
 function checkAnswer() {
-    var userAnswer = document.getElementById('answer').value.trim();
-    var correctAnswer = expressions[currentQuestion].answer;
+    try {
+        var userAnswer = document.getElementById('answer').value.trim();
+        var correctAnswer = expressions[currentQuestion].answer;
 
-    if (normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer)) {
-        document.getElementById('result').textContent = 'Correct!';
-        score++;
-        document.getElementById('miniGameButton').style.display = 'block'; // Show mini-game button
-    } else {
-        document.getElementById('result').textContent = 'Incorrect. The correct answer is ' + correctAnswer;
-        setTimeout(nextQuestion, 1000);
+        if (normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer)) {
+            document.getElementById('result').textContent = 'Correct!';
+            score++;
+            document.getElementById('miniGameButton').style.display = 'block'; // Show mini-game button
+        } else {
+            document.getElementById('result').textContent = 'Incorrect. The correct answer is ' + correctAnswer;
+            setTimeout(nextQuestion, 1000);
+        }
+
+        document.getElementById('score').textContent = 'Score: ' + score;
+        document.getElementById('answer').value = '';
+    } catch (error) {
+        console.error("Error checking the answer:", error);
     }
-
-    document.getElementById('score').textContent = 'Score: ' + score;
-    document.getElementById('answer').value = '';
 }
 
 // Function to move to the next question
 function nextQuestion() {
-    currentQuestion++;
-    if (currentQuestion < expressions.length) {
-        showQuestion();
-    } else {
-        endGame();
+    try {
+        currentQuestion++;
+        if (currentQuestion < expressions.length) {
+            showQuestion();
+        } else {
+            endGame();
+        }
+    } catch (error) {
+        console.error("Error moving to the next question:", error);
     }
 }
 
 // Function to start the mini-game
 function startMiniGame() {
-    document.getElementById('miniGameButton').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'block';
-    document.getElementById('result').textContent = 'Enjoy the mini-game!';
+    try {
+        document.getElementById('miniGameButton').style.display = 'none';
+        document.getElementById('gameCanvas').style.display = 'block';
+        document.getElementById('result').textContent = 'Enjoy the mini-game!';
+    } catch (error) {
+        console.error("Error starting the mini-game:", error);
+    }
 }
 
 // Function to end the game
 function endGame() {
-    var percentage = (score / expressions.length) * 100;
-    var message = 'Game Over! You scored ' + score + ' out of ' + expressions.length + ' (' + percentage + '%).';
-    alert(message);
-    initGame(); // Reset the game
+    try {
+        var percentage = (score / expressions.length) * 100;
+        var message = 'Game Over! You scored ' + score + ' out of ' + expressions.length + ' (' + percentage + '%).';
+        alert(message);
+        initGame(); // Reset the game
+    } catch (error) {
+        console.error("Error ending the game:", error);
+    }
 }
 
 // Initialize the game on page load
