@@ -96,6 +96,7 @@ function nextQuestion() {
     }
 }
 
+
 // Function to start the mini-game
 function startMiniGame() {
     document.getElementById('miniGameButton').style.display = 'none';
