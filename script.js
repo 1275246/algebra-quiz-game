@@ -49,6 +49,10 @@ function resetSnakeGame() {
     var canvas = document.getElementById('gameCanvas');
     var context = canvas.getContext('2d');
 
+    // Set canvas size
+    canvas.width = 400;
+    canvas.height = 400;
+
     // Clear the canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -56,7 +60,7 @@ function resetSnakeGame() {
     var snake = {
         x: 160,
         y: 160,
-        dx: grid,
+        dx: 16,
         dy: 0,
         cells: [],
         maxCells: 4
@@ -73,24 +77,19 @@ function resetSnakeGame() {
     function loop() {
         requestAnimationFrame(loop);
 
-        if (++count < 4) {
-            return;
-        }
-
-        count = 0;
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         snake.x += snake.dx;
         snake.y += snake.dy;
 
         if (snake.x < 0) {
-            snake.x = canvas.width - grid;
+            snake.x = canvas.width - 16;
         } else if (snake.x >= canvas.width) {
             snake.x = 0;
         }
 
         if (snake.y < 0) {
-            snake.y = canvas.height - grid;
+            snake.y = canvas.height - 16;
         } else if (snake.y >= canvas.height) {
             snake.y = 0;
         }
@@ -102,16 +101,16 @@ function resetSnakeGame() {
         }
 
         context.fillStyle = 'red';
-        context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+        context.fillRect(apple.x, apple.y, 16 - 1, 16 - 1);
 
         context.fillStyle = 'green';
         snake.cells.forEach(function (cell, index) {
-            context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+            context.fillRect(cell.x, cell.y, 16 - 1, 16 - 1);
 
             if (cell.x === apple.x && cell.y === apple.y) {
                 snake.maxCells++;
-                apple.x = getRandomInt(0, 25) * grid;
-                apple.y = getRandomInt(0, 25) * grid;
+                apple.x = getRandomInt(0, 25) * 16;
+                apple.y = getRandomInt(0, 25) * 16;
             }
 
             for (var i = index + 1; i < snake.cells.length; i++) {
@@ -120,10 +119,10 @@ function resetSnakeGame() {
                     snake.y = 160;
                     snake.cells = [];
                     snake.maxCells = 4;
-                    snake.dx = grid;
+                    snake.dx = 16;
                     snake.dy = 0;
-                    apple.x = getRandomInt(0, 25) * grid;
-                    apple.y = getRandomInt(0, 25) * grid;
+                    apple.x = getRandomInt(0, 25) * 16;
+                    apple.y = getRandomInt(0, 25) * 16;
                 }
             }
         });
@@ -131,16 +130,16 @@ function resetSnakeGame() {
 
     document.addEventListener('keydown', function (e) {
         if (e.which === 37 && snake.dx === 0) {
-            snake.dx = -grid;
+            snake.dx = -16;
             snake.dy = 0;
         } else if (e.which === 38 && snake.dy === 0) {
-            snake.dy = -grid;
+            snake.dy = -16;
             snake.dx = 0;
         } else if (e.which === 39 && snake.dx === 0) {
-            snake.dx = grid;
+            snake.dx = 16;
             snake.dy = 0;
         } else if (e.which === 40 && snake.dy === 0) {
-            snake.dy = grid;
+            snake.dy = 16;
             snake.dx = 0;
         }
         if ([37, 38, 39, 40].includes(e.which)) {
