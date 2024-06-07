@@ -1,83 +1,53 @@
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
-
-/* Gradient Background */
 body {
-    background: linear-gradient(to right, #74ebd5, #ACB6E5); /* Gradient from teal to light blue */
-    font-family: 'Comic Neue', cursive;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f0f0f0, #e0e0e0);
     text-align: center;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevent horizontal scrollbar */
 }
 
-/* Title Styles */
 h1 {
-    font-family: Arial, sans-serif; /* Change to Arial */
-    font-size: 3em;
-    color: #ffffff;
-    margin-top: 50px;
-    animation: fadeIn 1s ease; /* Fade-in animation */
+    font-family: 'Comic Neue', cursive;
+    font-size: 2.5em;
+    color: #333;
+    margin-top: 20px;
 }
 
-/* Button Styles */
+#game-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+#question-container p {
+    font-size: 1.2em;
+}
+
+#answer {
+    width: calc(100% - 22px);
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
 button {
-    background-color: #ff7f50; /* Coral color */
-    color: #fff;
     padding: 10px 20px;
+    font-size: 1em;
+    margin: 10px 0;
     cursor: pointer;
+}
+
+#miniGameButton {
+    background-color: #0095DD;
+    color: white;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-button:hover {
-    background-color: #ff6347; /* Darker coral for hover effect */
-}
-
-/* Input Styles */
-input[type="text"] {
-    padding: 10px;
-    border: 2px solid #ff7f50;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    font-size: 1em;
-}
-
-/* Game Container Styles */
-#game-container {
-    background-color: rgba(255, 255, 255, 0.9); /* Add transparency to the background color */
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin: 50px auto;
-    width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    animation: slideIn 1s ease; /* Slide-in animation */
-}
-
-/* Result and Score Styles */
-#result, #score, #progress {
-    font-family: 'Comic Neue', cursive;
-    font-size: 1.2em;
-    color: #333;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(-100%);
-    }
-    to {
-        transform: translateY(0);
-    }
+#gameCanvas {
+    margin-top: 20px;
 }
