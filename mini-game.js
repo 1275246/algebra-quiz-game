@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 dy = -dy;
             } else {
                 document.location.reload();
+                clearInterval(interval);
             }
         }
 
@@ -76,5 +77,5 @@ document.addEventListener("DOMContentLoaded", function() {
         y += dy;
     }
 
-    setInterval(draw, 10);
+    var interval = setInterval(draw, 10);
 });
