@@ -194,6 +194,9 @@ function initSnakeGame() {
             snake.dy = grid;
             snake.dx = 0;
         }
+        if ([37, 38, 39, 40].includes(e.which)) {
+            e.preventDefault();
+        }
     });
 
     requestAnimationFrame(loop);
