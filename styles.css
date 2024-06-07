@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f0f0f0, #e0e0e0);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: 'Comic Neue', cursive;
+    font-size: 2.5em;
+    color: #333;
+    margin-top: 20px;
+}
+
+#game-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+#question-container p {
+    font-size: 1.2em;
+}
+
+#answer {
+    width: calc(100% - 22px);
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+#miniGameButton {
+    background-color: #0095DD;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#gameCanvas {
+    margin-top: 20px;
+}
