@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (x > paddleX && x < paddleX + paddleWidth) {
                 dy = -dy;
             } else {
-                alert("GAME OVER");
+                // Instead of alerting "GAME OVER", simply reload the page
                 document.location.reload();
             }
         }
@@ -78,4 +78,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     var interval = setInterval(draw, 10);
+
+    function check(answer) {
+        var question = document.getElementById("question").innerHTML;
+        var result = document.getElementById("result");
+        var score = document.getElementById("score");
+
+        if (answer == eval(question)) {
+            result.innerHTML = "Correct! You get to play the mini-game!";
+            score.innerHTML = parseInt(score.innerHTML) + 1;
+            generate();
+            // You can call a function to start the mini-game here
+            // For example, startMiniGame();
+        } else {
+            result.innerHTML = "Incorrect! The correct answer is: " + eval(question);
+            generate(); // Generate the next question regardless of the answer
+        }
+    }
 });
