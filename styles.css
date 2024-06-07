@@ -55,7 +55,6 @@ button {
 .box {
     width: 100px;
     height: 100px;
-    background-color: #fff; /* Default color */
     transition: background-color 0.3s ease; /* Smooth color transition */
 }
 
