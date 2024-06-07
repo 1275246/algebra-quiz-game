@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var isMiniGameActive = false;
     var miniGameStartTime;
 
+    // Variable to track if out of bounds message has been shown
+    var outOfBoundsMessageShown = false;
+
     // Function to draw a single cell
     function drawCell(x, y) {
         ctx.fillStyle = "black";
@@ -92,8 +95,11 @@ document.addEventListener("DOMContentLoaded", function() {
         var head = snake[0];
         if (isMiniGameActive && (head.x < 0 || head.x >= canvasWidth / cellSize || head.y < 0 || head.y >= canvasHeight / cellSize)) {
             // Out of bounds
-            alert("Game over! You went out of bounds.");
-            resetMiniGame();
+            if (!outOfBoundsMessageShown) {
+                outOfBoundsMessageShown = true;
+                alert("Game over! You went out of bounds.");
+                resetMiniGame();
+            }
         } else if (isMiniGameActive && (Date.now() - miniGameStartTime) >= 30000) {
             // Timeout (30 seconds)
             alert("Time's up! You have reached the time limit.");
@@ -121,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to reset the mini-game
     function resetMiniGame() {
         isMiniGameActive = false;
+        outOfBoundsMessageShown = false; // Reset message shown flag
         snake = [{ x: 10, y: 10 }]; // Reset snake position
         dx = 1;
         dy = 0;
