@@ -74,8 +74,9 @@ function nextQuestion() {
 
 // Function to start the mini-game
 function startMiniGame() {
-    window.open('https://playsnake.org/', 'Snake Game', 'width=600,height=400');
+    var gameWindow = window.open('https://url-snake.netlify.app/', 'Snake Game', 'width=600,height=400');
     setTimeout(() => {
+        gameWindow.close();
         alert('Time\'s up! Returning to the quiz.');
         nextQuestion();
     }, 30000); // 30 seconds timer
