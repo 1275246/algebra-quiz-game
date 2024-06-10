@@ -21,46 +21,29 @@ function shuffle(array) {
 // Variables to track game progress
 var currentQuestion = 0;
 var score = 0;
-var timeoutId; // Variable to store timeout ID
 
 // Function to initialize the game
 function initGame() {
-    currentQuestion = 0;
-    score = 0;
-    expressions = shuffle(expressions); // Shuffle questions
-    showQuestion();
+    try {
+        currentQuestion = 0;
+        score = 0;
+        expressions = shuffle(expressions); // Shuffle questions
+        showQuestion();
+    } catch (error) {
+        console.error("Error initializing the game:", error);
+    }
 }
 
 // Function to display current question
 function showQuestion() {
-    var question = expressions[currentQuestion].expression;
-    document.getElementById('question').textContent = question;
-    document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
-    document.getElementById('result').textContent = '';
-    document.getElementById('miniGameButton').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'none';
-
-    // Reset the snake game
-    resetSnakeGame();
-}
-
-// Function to reset the snake game
-function resetSnakeGame() {
-    var canvas = document.getElementById('gameCanvas');
-    var context = canvas.getContext('2d');
-
-    // Clear the canvas
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Reset snake and apple positions
-    snake.x = 160;
-    snake.y = 160;
-    snake.dx = grid;
-    snake.dy = 0;
-    snake.cells = [];
-    snake.maxCells = 4;
-    apple.x = 320;
-    apple.y = 320;
+    try {
+        var question = expressions[currentQuestion].expression;
+        document.getElementById('question').textContent = question;
+        document.getElementById('progress').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + expressions.length;
+        document.getElementById('result').textContent = '';
+    } catch (error) {
+        console.error("Error showing the question:", error);
+    }
 }
 
 // Function to normalize answers by removing spaces
@@ -70,160 +53,66 @@ function normalizeAnswer(answer) {
 
 // Function to check answer
 function checkAnswer() {
-    var userAnswer = document.getElementById('answer').value.trim();
-    var correctAnswer = expressions[currentQuestion].answer;
+    try {
+        var userAnswer = document.getElementById('answer').value.trim();
+        var correctAnswer = expressions[currentQuestion].answer;
 
-    if (normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer)) {
-        document.getElementById('result').textContent = 'Correct!';
-        score++;
-        document.getElementById('miniGameButton').style.display = 'block'; // Show mini-game button
-    } else {
-        document.getElementById('result').textContent = 'Incorrect. The correct answer is ' + correctAnswer;
-        setTimeout(nextQuestion, 1000);
+        if (normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer)) {
+            document.getElementById('result').textContent = 'Correct!';
+            score++;
+            openGamePopup(); // Open the game popup as a reward
+        } else {
+            document.getElementById('result').textContent = 'Incorrect. The correct answer is ' + correctAnswer;
+            setTimeout(nextQuestion, 1000);
+        }
+
+        document.getElementById('score').textContent = 'Score: ' + score;
+        document.getElementById('answer').value = '';
+    } catch (error) {
+        console.error("Error checking the answer:", error);
     }
-
-    document.getElementById('score').textContent = 'Score: ' + score;
-    document.getElementById('answer').value = '';
 }
 
 // Function to move to the next question
 function nextQuestion() {
-    currentQuestion++;
-    if (currentQuestion < expressions.length) {
-        showQuestion();
-    } else {
-        endGame();
+    try {
+        currentQuestion++;
+        if (currentQuestion < expressions.length) {
+            showQuestion();
+        } else {
+            endGame();
+        }
+    } catch (error) {
+        console.error("Error moving to the next question:", error);
     }
 }
 
-
-// Function to start the mini-game
-function startMiniGame() {
-    document.getElementById('miniGameButton').style.display = 'none';
-    document.getElementById('gameCanvas').style.display = 'block';
-    initSnakeGame();
-
-    // Set the timeout for 30 seconds
-    timeoutId = setTimeout(() => {
-        document.getElementById('gameCanvas').style.display = 'none';
-        alert('Time\'s up! Returning to the quiz.');
-        nextQuestion(); // Move to the next question
-    }, 30000);
+// Function to open the game popup and close it after 30 seconds
+function openGamePopup() {
+    try {
+        var popup = window.open('https://play.geforcenow.com/mall/#/layout/games', 'GamePopup', 'width=800,height=600');
+        setTimeout(function() {
+            if (popup) {
+                popup.close();
+                nextQuestion(); // Move to the next question after the game popup closes
+            }
+        }, 30000); // Close after 30 seconds
+    } catch (error) {
+        console.error("Error opening the game popup:", error);
+    }
 }
-
 
 // Function to end the game
 function endGame() {
-    clearTimeout(timeoutId); // Clear the timeout when the game ends
-    var percentage = (score / expressions.length) * 100;
-    var message = 'Game Over! You scored ' + score + ' out of ' + expressions.length + ' (' + percentage + '%).';
-    alert(message);
-    initGame(); // Reset the game
+    try {
+        var percentage = (score / expressions.length) * 100;
+        var message = 'Game Over! You scored ' + score + ' out of ' + expressions.length + ' (' + percentage + '%).';
+        alert(message);
+        initGame(); // Reset the game
+    } catch (error) {
+        console.error("Error ending the game:", error);
+    }
 }
 
 // Initialize the game on page load
 window.onload = initGame;
-
-// Snake game code
-var canvas = document.getElementById('gameCanvas');
-var context = canvas.getContext('2d');
-
-var grid = 16;
-var count = 0;
-
-var snake = {
-    x: 160,
-    y: 160,
-    dx: grid,
-    dy: 0,
-    cells: [],
-    maxCells: 4
-};
-var apple = {
-    x: 320,
-    y: 320
-};
-
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-function loop() {
-    requestAnimationFrame(loop);
-
-    if (++count < 4) {
-        return;
-    }
-
-    count = 0;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    snake.x += snake.dx;
-    snake.y += snake.dy;
-
-    if (snake.x < 0) {
-        snake.x = canvas.width - grid;
-    } else if (snake.x >= canvas.width) {
-        snake.x = 0;
-    }
-
-    if (snake.y < 0) {
-        snake.y = canvas.height - grid;
-    } else if (snake.y >= canvas.height) {
-        snake.y = 0;
-    }
-
-    snake.cells.unshift({ x: snake.x, y: snake.y });
-
-    if (snake.cells.length > snake.maxCells) {
-        snake.cells.pop();
-    }
-
-    context.fillStyle = 'red';
-    context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
-
-    context.fillStyle = 'green';
-    snake.cells.forEach(function (cell, index) {
-        context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
-
-        if (cell.x === apple.x && cell.y === apple.y) {
-            snake.maxCells++;
-            apple.x = getRandomInt(0, 25) * grid;
-            apple.y = getRandomInt(0, 25) * grid;
-        }
-
-        for (var i = index + 1; i < snake.cells.length; i++) {
-            if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-                snake.x = 160;
-                snake.y = 160;
-                snake.cells = [];
-                snake.maxCells = 4;
-                snake.dx = grid;
-                snake.dy = 0;
-                apple.x = getRandomInt(0, 25) * grid;
-                apple.y = getRandomInt(0, 25) * grid;
-            }
-        }
-    });
-}
-
-document.addEventListener('keydown', function (e) {
-    if (e.which === 37 && snake.dx === 0) {
-        snake.dx = -grid;
-        snake.dy = 0;
-    } else if (e.which === 38 && snake.dy === 0) {
-        snake.dy = -grid;
-        snake.dx = 0;
-    } else if (e.which === 39 && snake.dx === 0) {
-        snake.dx = grid;
-        snake.dy = 0;
-    } else if (e.which === 40 && snake.dy === 0) {
-        snake.dy = grid;
-        snake.dx = 0;
-    }
-    if ([37, 38, 39, 40].includes(e.which)) {
-        e.preventDefault();
-    }
-});
-
-requestAnimationFrame(loop);
