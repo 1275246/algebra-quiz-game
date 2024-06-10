@@ -90,7 +90,7 @@ function nextQuestion() {
 // Function to open the game popup and close it after 30 seconds
 function openGamePopup() {
     try {
-        var popup = window.open('https://play.geforcenow.com/mall/#/layout/games', 'GamePopup', 'width=800,height=600');
+        var popup = window.open('https://offline-dino-game.firebaseapp.com/', 'GamePopup', 'width=800,height=600');
         setTimeout(function() {
             if (popup) {
                 popup.close();
