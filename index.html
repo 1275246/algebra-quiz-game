@@ -5,41 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Kevin</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            background: linear-gradient(to right, #3498db, #5effcb); /* Gradient background */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        canvas {
-            border: 1px solid black;
-        }
-        #gameCanvas {
-            display: none;
-        }
-    </style>
+    <script src="script.js" defer></script>
+    <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
-    <h1>Kevin's Simplifying Expressions Game</h1>
-    <div id="game-container">
-        <div id="question-container">
-            <p id="question"></p>
-        </div>
+    <div class="container">
+        <h1>Kevin's Simplifying Expressions Game</h1>
+        <div id="question"></div>
+        <div id="progress"></div>
         <input type="text" id="answer" placeholder="Enter your answer">
-        <button onclick="checkAnswer()">Submit</button>
-        <p id="result"></p>
-        <p id="score">Score: 0</p>
-        <p id="progress">Question 1 of 7</p>
-        <button id="miniGameButton" style="display: none;" onclick="startMiniGame()">Play Mini-Game!</button>
+        <button onclick="checkAnswer()">Submit Answer</button>
+        <div id="result"></div>
+        <div id="score"></div>
     </div>
-    <canvas width="400" height="400" id="gameCanvas"></canvas>
-    <div class="box"></div> <!-- Box for animation -->
-    <script src="script.js"></script>
 </body>
 </html>
