@@ -95,12 +95,14 @@ function openGamePopup() {
             if (popup) {
                 popup.close();
                 nextQuestion(); // Move to the next question after the game popup closes
+                alert("Your 30 seconds of the mini game have ended!"); // Display message here
             }
         }, 30000); // Close after 30 seconds
     } catch (error) {
         console.error("Error opening the game popup:", error);
     }
 }
+
 
 // Function to end the game
 function endGame() {
